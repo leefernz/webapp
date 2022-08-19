@@ -31,23 +31,33 @@ pipeline{
         }
 
          // Stage3 : Publish the artifacts to Nexus
-        stage ('Publish to Nexus'){
-            steps{
-                script{
+        //stage ('Publish to Nexus'){
+           // steps{
+           //     script{
 
-                        def NexusRepo = Version.endsWith("SNAPSHOT") ? "DevOpsLab-SNAPSHOT" : "DevOpsLab-RELEASE"
-                        nexusArtifactUploader artifacts: [[artifactId: "${ArtifactId}", 
-                classifier: '', file: "target/ ${ArtifactId}-${Version}.war", type: 'war']], 
-                credentialsId: '65058126-641b-494b-980d-68c2c4f7b110', groupId: "${GroupId}", 
-                nexusUrl: '54.210.43.244:8081', nexusVersion: 'nexus3', protocol: 'http',
-                 repository: "${NexusRepo}", version: "${Version}"
+          //              def NexusRepo = Version.endsWith("SNAPSHOT") ? "DevOpsLab-SNAPSHOT" : "DevOpsLab-RELEASE"
+          //              nexusArtifactUploader artifacts: [[artifactId: "${ArtifactId}", 
+           //     classifier: '', file: "target/ ${ArtifactId}-${Version}.war", type: 'war']], 
+             //   credentialsId: '65058126-641b-494b-980d-68c2c4f7b110', groupId: "${GroupId}", 
+           //     nexusUrl: '54.210.43.244:8081', nexusVersion: 'nexus3', protocol: 'http',
+           //      repository: "${NexusRepo}", version: "${Version}"
 
-                }   
-            }
-        }
+           //     }   
+         //   }
+      //  }
+
+        // Stage 4 : Print some information
+        stage ('Print Environment variables'){
+                    steps {
+                        echo "Artifact ID is '${ArtifactId}'"
+                        echo "Version is '${Version}'"
+                        echo "GroupID is '${GroupId}'"
+                        echo "Name is '${Name}'"
+                    }
+                }
 
 
-         // Stage4 : Deploying
+         // Stage 5 : Deploying
         stage ('Deploying'){
             steps{
                 echo "Deploying"
