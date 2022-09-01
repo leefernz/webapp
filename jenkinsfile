@@ -62,7 +62,7 @@ pipeline{
                 echo "Deploying ...."
                 sshPublisher(publishers: 
                 [sshPublisherDesc(
-                    configName: 'AnsibleController', 
+                    configName: 'Ansible_Controler', 
                     transfers: [
                         sshTransfer(
                                 cleanRemote:false,
